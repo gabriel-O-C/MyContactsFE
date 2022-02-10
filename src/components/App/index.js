@@ -2,7 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '../../assets/styles/Global';
 import defaultTheme from '../../assets/styles/themes/default';
 import { Container } from './styles';
-import { Header } from '../index';
+import { Header, ContactsList } from '../index';
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
 
       <Container>
         <Header />
-
       </Container>
+      <ContactsList />
     </ThemeProvider>
   );
 }

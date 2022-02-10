@@ -12,7 +12,7 @@ export default createGlobalStyle`
   }
   body{
     font-size: 1.6rem;
-    background: ${({ theme }) => theme.backgroundColor};
+    background: ${({ theme }) => theme.colors.background};
   }
   button{
     cursor: pointer;
