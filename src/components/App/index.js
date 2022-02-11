@@ -13,8 +13,8 @@ function App() {
         <GlobalStyles />
         <Container>
           <Header />
+          <AppRoutes />
         </Container>
-        <AppRoutes />
       </ThemeProvider>
     </BrowserRouter>
 
