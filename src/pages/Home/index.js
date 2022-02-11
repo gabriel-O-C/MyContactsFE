@@ -5,10 +5,12 @@ import {
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import Modal from '../../components/Modal';
 
 export default function ContactsList() {
   return (
     <Container>
+      <Modal />
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
