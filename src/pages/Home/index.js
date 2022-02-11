@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Card, Container, Header, ListContainer, InputSearchContainer,
 } from './styles';
@@ -13,7 +14,7 @@ export default function ContactsList() {
       </InputSearchContainer>
       <Header>
         <strong>3 contatos</strong>
-        <a href="/">Novo contato</a>
+        <Link to="/new">Novo contato</Link>
       </Header>
       <ListContainer>
         <header>
@@ -32,50 +33,15 @@ export default function ContactsList() {
             <span>(45) 9999-9999</span>
           </div>
           <div className="actions">
-            <a href="/" alt="edit contacts page">
+            <Link to="/edit/123" alt="edit contacts page">
               <img src={Edit} alt="edit" />
-            </a>
+            </Link>
             <button type="button">
               <img src={trash} alt="delete" />
             </button>
           </div>
         </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Gabriel Chaves</strong>
-              <small>instagram</small>
-            </div>
-            <span>gabriel@mail.com</span>
-            <span>(45) 9999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/" alt="edit contacts page">
-              <img src={Edit} alt="edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="delete" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Gabriel Chaves</strong>
-              <small>instagram</small>
-            </div>
-            <span>gabriel@mail.com</span>
-            <span>(45) 9999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/" alt="edit contacts page">
-              <img src={Edit} alt="edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="delete" />
-            </button>
-          </div>
-        </Card>
+
       </ListContainer>
     </Container>
   );
