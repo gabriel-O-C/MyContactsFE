@@ -18,6 +18,7 @@ export default function ContactForm({ buttonLabel }) {
   function handleSubmit(event) {
     event.preventDefault();
   }
+
   function handleNameChange(event) {
     setName(event.target.value);
 
@@ -32,6 +33,7 @@ export default function ContactForm({ buttonLabel }) {
       ));
     }
   }
+
   function handleEmailChange(event) {
     setEmail(event.target.value);
 
@@ -51,18 +53,25 @@ export default function ContactForm({ buttonLabel }) {
       ));
     }
   }
-  console.log(errors);
+
+  function getErrorMessageByFieldName(fieldname) {
+    return errors.find((error) => error.field === fieldname)?.message;
+  }
   return (
     <Form onSubmit={handleSubmit}>
-      <FormGroup>
+      <FormGroup
+        error={getErrorMessageByFieldName('name')}
+      >
         <Input
+          error={getErrorMessageByFieldName('name')}
           placeholder="Nome"
           value={name}
           onChange={handleNameChange}
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
+          error={getErrorMessageByFieldName('email')}
           placeholder="E-mail"
           value={email}
           onChange={handleEmailChange}
