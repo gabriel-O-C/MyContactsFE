@@ -1,6 +1,7 @@
 import propTypes from 'prop-types';
 import { useState } from 'react';
 
+import UseErrors from '../../hooks/useErrors';
 import { ButtonContainer, Form } from './styles';
 import isEmailValid from '../../utils/isEmailValid';
 import Input from '../Input';
@@ -13,7 +14,7 @@ export default function ContactForm({ buttonLabel }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
-  const [errors, setErrors] = useState([]);
+  const { setError, getErrorMessageByFieldName, removeError } = UseErrors();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,39 +24,20 @@ export default function ContactForm({ buttonLabel }) {
     setName(event.target.value);
 
     if (!event.target.value) {
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'name', message: 'Nome é obrigatório.' },
-      ]);
+      setError({ field: 'name', message: 'Nome é obrigatório.' });
     } else {
-      setErrors((prevState) => prevState.filter(
-        (error) => error.field !== 'name',
-      ));
+      removeError('name');
     }
   }
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
 
-    if (event.target.value && !isEmailValid) {
-      const errorAlreadyExists = errors.find((error) => error.field === 'emil');
-
-      if (errorAlreadyExists) {
-        return;
-      }
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'email', message: 'O email é inválido' },
-      ]);
+    if (event.target.value && !isEmailValid(event.target.value)) {
+      setError({ field: 'email', message: 'O email é inválido' });
     } else {
-      setErrors((prevState) => prevState.filter(
-        (error) => error.field !== 'email',
-      ));
+      removeError('email');
     }
-  }
-
-  function getErrorMessageByFieldName(fieldname) {
-    return errors.find((error) => error.field === fieldname)?.message;
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -81,7 +63,7 @@ export default function ContactForm({ buttonLabel }) {
         <Input
           placeholder="Telefone"
           value={phone}
-          setPhone={(event) => setPhone(event.target.value)}
+          onChange={(event) => setPhone(event.target.value)}
         />
       </FormGroup>
       <FormGroup>
