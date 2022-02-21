@@ -4,6 +4,7 @@ import { useState } from 'react';
 import UseErrors from '../../hooks/useErrors';
 import { ButtonContainer, Form } from './styles';
 import isEmailValid from '../../utils/isEmailValid';
+import formatPhone from '../../utils/formatPhone';
 import Input from '../Input';
 import Select from '../Select';
 import { FormGroup } from '..';
@@ -14,8 +15,13 @@ export default function ContactForm({ buttonLabel }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
-  const { setError, getErrorMessageByFieldName, removeError } = UseErrors();
-
+  const {
+    errors,
+    setError,
+    getErrorMessageByFieldName,
+    removeError,
+  } = UseErrors();
+  const isFormValid = (name && errors.length === 0);
   function handleSubmit(event) {
     event.preventDefault();
   }
@@ -39,14 +45,21 @@ export default function ContactForm({ buttonLabel }) {
       removeError('email');
     }
   }
+
+  function handlePhoneChange(event) {
+    setPhone(formatPhone(event.target.value));
+  }
   return (
-    <Form onSubmit={handleSubmit} noValidate>
+    <Form
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <FormGroup
         error={getErrorMessageByFieldName('name')}
       >
         <Input
           error={getErrorMessageByFieldName('name')}
-          placeholder="Nome"
+          placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
         />
@@ -64,7 +77,8 @@ export default function ContactForm({ buttonLabel }) {
         <Input
           placeholder="Telefone"
           value={phone}
-          onChange={(event) => setPhone(event.target.value)}
+          onChange={handlePhoneChange}
+          maxLength={15}
         />
       </FormGroup>
       <FormGroup>
@@ -80,6 +94,7 @@ export default function ContactForm({ buttonLabel }) {
       <ButtonContainer>
         <Button
           type="submit"
+          disabled={!isFormValid}
         >
           {buttonLabel}
         </Button>
