@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
+import { Loader } from '../../components';
 import {
   Card, Container, Header, ListHeader, InputSearchContainer,
 } from './styles';
@@ -11,20 +12,27 @@ export default function ContactsList() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   ), [contacts, searchTerm]));
 
   useEffect(() => {
-    fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
-      .then(async (response) => {
+    async function loadContacts() {
+      try {
+        setIsLoading(true);
+        const response = await fetch(`
+        http://localhost:3001/contacts?orderBy=${orderBy}`);
         const json = await response.json();
         setContacts(json);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } catch (error) {
+        console.log('error', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadContacts();
   }, [orderBy]);
 
   function handleToggleOrderBy() {
@@ -37,6 +45,9 @@ export default function ContactsList() {
   }
   return (
     <Container>
+      <Loader
+        isLoading={isLoading}
+      />
       <InputSearchContainer>
         <input
           onChange={handleChangeSearchTerm}
