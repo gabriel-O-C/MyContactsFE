@@ -27,5 +27,6 @@ module.exports = {
     'no-useless-return': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'class-methods-use-this': 'off',
   },
 };
