@@ -3,3 +3,4 @@ export { default as ContactsList } from './ContactsList';
 export { default as PageHeader } from './PageHeader';
 export { default as FormGroup } from './FormGroup';
 export { default as Loader } from './Loader';
+export { default as Button } from './Button';
