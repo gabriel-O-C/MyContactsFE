@@ -25,7 +25,7 @@ input{
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: ${({ hasError }) => (hasError ? 'flex-end' : 'space-between')};
+  justify-content: ${({ justifyContent }) => justifyContent};
   margin-bottom: 8px;
   margin-top: 32px;
   border-bottom: 2px solid ${({ theme }) => theme.colors.gray[100]};
@@ -129,4 +129,22 @@ export const ErrorContainer = styled.div`
         margin-bottom: 8px;
       }
     }
+`;
+
+export const EmptyListContainer = styled.div`
+ display: flex;
+ flex-direction: column;
+ margin-top: 16px;
+ align-items: center;
+ color: ${({ theme }) => theme.colors.gray[200]};
+ text-align: center;
+
+ img {
+ margin-bottom: 8px;
+}
+
+ span {
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary.main};
+}
 `;

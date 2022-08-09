@@ -28,5 +28,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'class-methods-use-this': 'off',
+    'no-nested-ternary': 'off',
   },
 };
