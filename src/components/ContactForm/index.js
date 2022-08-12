@@ -1,10 +1,11 @@
 import propTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import UseErrors from '../../hooks/useErrors';
 import { ButtonContainer, Form } from './styles';
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
+import CategoriesService from '../../services/CategoriesService';
 import Input from '../Input';
 import Select from '../Select';
 import { FormGroup } from '..';
@@ -14,7 +15,8 @@ export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState('');
+  const [categoryID, setCategoryID] = useState('');
+  const [categories, setCategories] = useState([]);
   const {
     errors,
     setError,
@@ -25,6 +27,14 @@ export default function ContactForm({ buttonLabel }) {
   function handleSubmit(event) {
     event.preventDefault();
   }
+
+  useEffect(() => {
+    async function loadCategories() {
+      const categoriesList = await CategoriesService.listCategories();
+      setCategories(categoriesList);
+    }
+    loadCategories();
+  }, []);
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -83,12 +93,20 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
       <FormGroup>
         <Select
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
+          value={categoryID}
+          onChange={(event) => setCategoryID(event.target.value)}
         >
-          <option value="Categoria">Categoria</option>
-          <option value="instagram">instagram</option>
-          <option value="Discord">Discord</option>
+          <option value="sem categoria">
+            Sem categoria
+          </option>
+          {categories.map((category) => (
+            <option
+              key={category.id}
+              value={category.id}
+            >
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
       <ButtonContainer>
