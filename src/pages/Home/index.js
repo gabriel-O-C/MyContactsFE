@@ -1,4 +1,5 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable react/jsx-one-expression-per-line  */
 import { Link } from 'react-router-dom';
 import {
   useCallback,
@@ -8,13 +9,21 @@ import {
 } from 'react';
 import { Loader, Button } from '../../components';
 import {
-  Card, Container, Header, ListHeader, InputSearchContainer, ErrorContainer, EmptyListContainer,
+  Card,
+  Container,
+  Header,
+  ListHeader,
+  InputSearchContainer,
+  ErrorContainer,
+  EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles';
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import sad from '../../assets/images/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import ContactsService from '../../services/ContactsService';
 
 export default function ContactsList() {
@@ -116,6 +125,13 @@ export default function ContactsList() {
               </p>
             </EmptyListContainer>
           )}
+          {(contacts.length > 0 && filteredContacts.length < 1) && (
+            <SearchNotFoundContainer>
+              <img src={magnifierQuestion} alt="magnifier question" />
+              <span>Nenhum resultado foi encontrado para <strong>”{searchTerm}”</strong>.</span>
+            </SearchNotFoundContainer>
+          )}
+
           {filteredContacts.length > 0 && (
             <ListHeader orderBy={orderBy}>
               <button type="button" onClick={handleToggleOrderBy}>
