@@ -51,6 +51,7 @@ export default function ContactsList() {
       setIsLoading(false);
     }
   }, [orderBy]);
+
   useEffect(() => {
     loadContacts();
   }, [loadContacts]);
