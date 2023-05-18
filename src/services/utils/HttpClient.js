@@ -43,7 +43,7 @@ class HttpClient {
 
     let responseBody = null;
 
-    if (contentType.includes('application/json')) {
+    if (contentType?.includes('application/json')) {
       responseBody = response.json();
     }
 

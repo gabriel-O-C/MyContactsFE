@@ -1,3 +1,4 @@
+import React from 'react';
 import { PageHeader } from '../../components';
 import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
@@ -9,7 +10,7 @@ export default function NewContact() {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        category_id: formData.categoryId,
+        category_id: formData.categoryID,
       };
 
       const response = await ContactsService.createContact(contact);
