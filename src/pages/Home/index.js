@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line  */
 import { Link } from 'react-router-dom';
-import {
+import React, {
   useCallback,
   useEffect,
   useMemo,
@@ -82,7 +82,8 @@ export default function ContactsList() {
       </InputSearchContainer>
       )}
 
-      <Header justifyContent={
+      <Header
+        justifyContent={
         hasError
           ? 'flex-end'
           : (
@@ -155,7 +156,7 @@ export default function ContactsList() {
                   <span>{contact.phone}</span>
                 </div>
                 <div className="actions">
-                  <Link to={`/edit/${contact.id}`} alt="edit contacts page">
+                  <Link to={`/edit/${contact.id}`} title="edit contacts page">
                     <img src={Edit} alt="edit" />
                   </Link>
                   <button type="button">
