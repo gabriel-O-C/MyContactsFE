@@ -4,6 +4,10 @@ import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
 
 export default function NewContact() {
+  /**
+   *
+   * @param {{name: string, email: string, phone: string, categoryID: string}} formData
+   */
   async function handleSubmit(formData) {
     try {
       const contact = {
