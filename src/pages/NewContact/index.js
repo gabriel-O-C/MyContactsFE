@@ -20,7 +20,14 @@ export default function NewContact() {
       const response = await ContactsService.createContact(contact);
       console.log({ response });
     } catch {
-      alert('Ocorreu um erro ao cadastrar o usuário!');
+      const event = new CustomEvent('addtoast', {
+        detail: {
+          type: 'danger',
+          text: ' Ocorreu um erro ao cadastrar o contato!',
+        },
+
+      });
+      document.dispatchEvent(event);
     }
   }
   return (
