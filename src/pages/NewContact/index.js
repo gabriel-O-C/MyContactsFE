@@ -2,6 +2,7 @@ import React from 'react';
 import { PageHeader } from '../../components';
 import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
+import toast from '../../utils/toast';
 
 export default function NewContact() {
   /**
@@ -17,17 +18,17 @@ export default function NewContact() {
         category_id: formData.categoryID,
       };
 
-      const response = await ContactsService.createContact(contact);
-      console.log({ response });
-    } catch {
-      const event = new CustomEvent('addtoast', {
-        detail: {
-          type: 'danger',
-          text: ' Ocorreu um erro ao cadastrar o contato!',
-        },
+      await ContactsService.createContact(contact);
 
+      toast({
+        type: 'success',
+        text: 'Contato cadastrado com sucesso!',
       });
-      document.dispatchEvent(event);
+    } catch {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao cadastrar o contato!',
+      });
     }
   }
   return (
