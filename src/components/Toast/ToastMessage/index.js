@@ -8,7 +8,6 @@ import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
  * @param {{text: string, type: ToastTypes }} param0
  * @returns
  */
-
 export function ToastMessage({ text, type }) {
   return (
     <Container type={type}>

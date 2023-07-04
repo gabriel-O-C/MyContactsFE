@@ -8,7 +8,6 @@ export default function toast({ type, text }) {
       type,
       text,
     },
-
   });
   document.dispatchEvent(event);
 }

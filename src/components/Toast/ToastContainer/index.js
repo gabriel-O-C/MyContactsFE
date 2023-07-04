@@ -28,9 +28,12 @@ export default function ToastContainer() {
   return (
     <Container>
       {messages.map((message) => (
-        <ToastMessage text={message.text} type={message.type} key={message.id} />
+        <ToastMessage
+          text={message.text}
+          type={message.type}
+          key={message.id}
+        />
       ))}
-
     </Container>
   );
 }

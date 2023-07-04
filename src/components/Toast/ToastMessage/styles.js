@@ -1,12 +1,17 @@
 import styled, { css } from 'styled-components';
 
 const containerVariants = {
+  default: css`
+    background: ${({ theme }) => theme.colors.primary.main};
+  `,
 
-  default: css`background: ${({ theme }) => theme.colors.primary.main};`,
+  success: css`
+    background: ${({ theme }) => theme.colors.success.main};
+  `,
 
-  success: css`background: ${({ theme }) => theme.colors.success.main};`,
-
-  danger: css` background: ${({ theme }) => theme.colors.danger.main};`,
+  danger: css`
+    background: ${({ theme }) => theme.colors.danger.main};
+  `,
 };
 
 export const Container = styled.div`
