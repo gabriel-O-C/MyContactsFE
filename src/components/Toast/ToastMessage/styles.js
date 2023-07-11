@@ -22,6 +22,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 16px 32px;
+  cursor: pointer;
 
   ${({ type }) => containerVariants[type] || containerVariants.default}
 
