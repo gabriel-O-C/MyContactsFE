@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { FormGroup } from '..';
 import UseErrors from '../../hooks/useErrors';
-import { ButtonContainer, Form } from './styles';
-import isEmailValid from '../../utils/isEmailValid';
-import formatPhone from '../../utils/formatPhone';
 import CategoriesService from '../../services/CategoriesService';
+import formatPhone from '../../utils/formatPhone';
+import isEmailValid from '../../utils/isEmailValid';
+import Button from '../Button';
 import Input from '../Input';
 import Select from '../Select';
-import { FormGroup } from '..';
-import Button from '../Button';
+import { ButtonContainer, Form } from './styles';
 
 /**
  *
@@ -42,6 +42,11 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
     });
 
     setIsSubmitting(false);
+
+    setCategoryID('');
+    setName('');
+    setPhone('');
+    setEmail('');
   }
 
   useEffect(() => {
