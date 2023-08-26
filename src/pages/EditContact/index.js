@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader, PageHeader } from '../../components';
 import ContactForm from '../../components/ContactForm';
@@ -8,12 +8,14 @@ import toast from '../../utils/toast';
 export default function EditContact() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const contactFormRef = useRef(null);
 
   useEffect(() => {
     async function loadContact() {
       try {
-        const contactData = await ContactsService.getContactById(1);
-        console.log(contactData);
+        const contact = await ContactsService.getContactById(id);
+
+        contactFormRef.current.setFieldsValues(contact);
         setIsLoading(false);
       } catch {
         toast({
@@ -21,7 +23,7 @@ export default function EditContact() {
           text: 'Contato não encontrado',
         });
         // TODO implement a solution using react-router-dom
-        window.location.assign('/');
+        // window.location.assign('/');
       }
     }
     loadContact();
@@ -33,8 +35,8 @@ export default function EditContact() {
         title="Editar contato"
       />
       <ContactForm
-        onSubmit={() => {}}
-        key={Math.random()}
+        ref={contactFormRef}
+        onSubmit={() => { }}
         buttonLabel="Salvar alterações"
       />
     </>
