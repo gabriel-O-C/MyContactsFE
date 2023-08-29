@@ -44,11 +44,6 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     });
 
     setIsSubmitting(false);
-
-    setCategoryID('');
-    setName('');
-    setPhone('');
-    setEmail('');
   }
 
   useImperativeHandle(ref, () => ({

@@ -39,6 +39,16 @@ class ContactsService {
   createContact(contact) {
     return this.httpClient.post('/contacts', { body: contact });
   }
+
+  /**
+   *
+   * @param {number} id
+   * @param {ContactDto} contact
+   * @returns {Promise<ContactDto>}
+   */
+  updateContact(id, contact) {
+    return this.httpClient.put(`/contacts/${id}`, { body: contact });
+  }
 }
 
 export default new ContactsService();
