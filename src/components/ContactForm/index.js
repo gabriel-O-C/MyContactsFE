@@ -99,7 +99,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     setPhone(formatPhone(event.target.value));
   }
   return (
-    <Form onSubmit={handleSubmit} noValidate>
+    <Form onSubmit={handleSubmit} noValidate name="contact-form">
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
           error={getErrorMessageByFieldName('name')}
@@ -107,6 +107,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           value={name}
           onChange={handleNameChange}
           disabled={isSubmitting}
+          name="name"
+          autoComplete="on"
         />
       </FormGroup>
       <FormGroup error={getErrorMessageByFieldName('email')}>
@@ -117,6 +119,9 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           value={email}
           onChange={handleEmailChange}
           disabled={isSubmitting}
+          name="email"
+          autoComplete="on"
+
         />
       </FormGroup>
       <FormGroup>
@@ -126,6 +131,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           onChange={handlePhoneChange}
           maxLength={15}
           disabled={isSubmitting}
+          name="phone"
+          autoComplete="on"
         />
       </FormGroup>
       <FormGroup isLoading={isLoadingCategories}>
@@ -133,6 +140,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           value={categoryID}
           onChange={(event) => setCategoryID(event.target.value)}
           disabled={isLoadingCategories || isSubmitting}
+          name="category"
         >
           <option value="sem categoria">Sem categoria</option>
 

@@ -1,30 +1,30 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line  */
-import { Link } from 'react-router-dom';
 import React, {
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
-import { Loader, Button } from '../../components';
-import {
-  Card,
-  Container,
-  Header,
-  ListHeader,
-  InputSearchContainer,
-  ErrorContainer,
-  EmptyListContainer,
-  SearchNotFoundContainer,
-} from './styles';
+import { Link } from 'react-router-dom';
+import emptyBox from '../../assets/images/empty-box.svg';
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/sad.svg';
-import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
+import sad from '../../assets/images/sad.svg';
+import { Button, Loader } from '../../components';
 import ContactsService from '../../services/ContactsService';
+import {
+  Card,
+  Container,
+  EmptyListContainer,
+  ErrorContainer,
+  Header,
+  InputSearchContainer,
+  ListHeader,
+  SearchNotFoundContainer,
+} from './styles';
 
 export default function ContactsList() {
   const [contacts, setContacts] = useState([]);
@@ -78,6 +78,7 @@ export default function ContactsList() {
           onChange={handleChangeSearchTerm}
           type="text"
           placeholder="Pesquisar contato..."
+          name="search"
         />
       </InputSearchContainer>
       )}
