@@ -5,7 +5,8 @@ import HttpClient from './utils/HttpClient';
  * @type {object}
  * @property {string} id
  * @property {string} name
- * @property {number} category_id
+ * @property {string} email
+ * @property {string} category_id
  * @property {string} phone
  */
 class ContactsService {

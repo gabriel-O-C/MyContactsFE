@@ -16,7 +16,6 @@ import { ButtonContainer, Form } from './styles';
  *
  * @param {{buttonLabel: string, onSubmit: function}} param0
  */
-
 // eslint-disable-next-line no-unused-vars
 const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [name, setName] = useState('');
@@ -57,10 +56,10 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
    * @param {import('../../services/ContactsService').ContactDto} contact
    */
     setFieldsValues: (contact) => {
-      setName(contact.name);
-      setEmail(contact.email);
-      setPhone(formatPhone(contact.phone));
-      setCategoryID(contact.category_id);
+      setName(contact.name ?? '');
+      setEmail(contact.email ?? '');
+      setPhone(formatPhone(contact.phone) ?? '');
+      setCategoryID(contact.category_id ?? '');
     },
   }), []);
 
