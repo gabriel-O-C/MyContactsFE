@@ -13,7 +13,7 @@ import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import sad from '../../assets/images/sad.svg';
-import { Button, Loader } from '../../components';
+import { Button, Loader, Modal } from '../../components';
 import ContactsService from '../../services/ContactsService';
 import {
   Card,
@@ -32,6 +32,8 @@ export default function ContactsList() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, sethasError] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [contactBeingDeleted, setContactBeingDeleted] = useState(null);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -67,11 +69,26 @@ export default function ContactsList() {
   function handleTryAgain() {
     loadContacts();
   }
+  function handleDeleteContact(contact) {
+    setContactBeingDeleted(contact);
+    setIsDeleteModalVisible(true);
+  }
+  function handleCloseDeleteModal() {
+    setIsDeleteModalVisible(false);
+  }
   return (
     <Container>
       <Loader
         isLoading={isLoading}
       />
+      <Modal
+        danger
+        title={`Você tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
+        visible={isDeleteModalVisible}
+        onCancel={handleCloseDeleteModal}
+      >
+        <p>Esta ação não poderá ser desfeita!</p>
+      </Modal>
       {contacts.length > 0 && (
       <InputSearchContainer>
         <input
@@ -160,7 +177,7 @@ export default function ContactsList() {
                   <Link to={`/edit/${contact.id}`} title="edit contacts page">
                     <img src={Edit} alt="edit" />
                   </Link>
-                  <button type="button">
+                  <button type="button" onClick={() => handleDeleteContact(contact)}>
                     <img src={trash} alt="delete" />
                   </button>
                 </div>

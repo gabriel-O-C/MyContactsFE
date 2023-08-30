@@ -1,21 +1,17 @@
 import PropTypes from 'prop-types';
-// eslint-disable-next-line no-unused-vars
-import { Component } from 'react';
 import { StyledButton } from './styles';
 import Spinner from '../Spinner';
 
-/**
- *
- * @param {{type: string, isLoading: boolean, disabled: boolean, children: Component}} param0
- * @returns {Component}
- */
 export default function Button({
-  type, isLoading, disabled, children,
+  type, isLoading, disabled, children, danger,
+  onClick,
 }) {
   return (
     <StyledButton
       disabled={disabled || isLoading}
       type={type}
+      danger={danger}
+      onClick={onClick}
     >
       {isLoading ? <Spinner size={16} /> : children }
     </StyledButton>
@@ -27,10 +23,14 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  danger: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   type: 'button',
   disabled: false,
   isLoading: false,
+  danger: false,
+  onClick: undefined,
 };
