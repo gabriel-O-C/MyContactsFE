@@ -47,14 +47,11 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   }
 
   useImperativeHandle(ref, () => ({
-    /**
-   * @param {import('../../services/ContactsService').ContactDto} contact
-   */
     setFieldsValues: (contact) => {
       setName(contact.name ?? '');
       setEmail(contact.email ?? '');
       setPhone(formatPhone(contact.phone) ?? '');
-      setCategoryID(contact.category_id ?? '');
+      setCategoryID(contact.category.id ?? '');
     },
     resetFields: () => {
       setName('');

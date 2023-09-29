@@ -8,17 +8,10 @@ export default function NewContact() {
   const contactFormRef = useRef(null);
   /**
    *
-   * @param {{name: string, email: string, phone: string, categoryID: string}} formData
+   * @param {{name: string, email: string, phone: string, categoryID: string}} contact
    */
-  async function handleSubmit(formData) {
+  async function handleSubmit(contact) {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryID,
-      };
-
       await ContactsService.createContact(contact);
 
       toast({

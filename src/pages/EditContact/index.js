@@ -36,15 +36,8 @@ export default function EditContact() {
     loadContact();
   }, [id, isMounted]);
 
-  async function handleSubmit(formData) {
+  async function handleSubmit(contact) {
     try {
-      const contact = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        category_id: formData.categoryID,
-      };
-
       const updatedContact = await ContactsService.updateContact(id, contact);
 
       setContactName(updatedContact.name);
