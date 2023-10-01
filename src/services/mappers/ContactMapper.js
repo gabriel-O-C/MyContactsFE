@@ -1,10 +1,15 @@
 class ContactMapper {
   /**
    *
-   * @param {{name: string, email: string, phone: string, categoryID: string}} domainContact
+   * @param {{name: string,
+   *  email: string,
+   *  phone: string,
+   *  categoryID: string,
+   *  id: string}} domainContact
    */
   toPersistence(domainContact) {
     return {
+      id: domainContact.id,
       name: domainContact.name,
       email: domainContact.email,
       phone: domainContact.phone,
