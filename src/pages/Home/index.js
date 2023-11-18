@@ -8,6 +8,7 @@ import trash from '../../assets/images/icons/trash.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import sad from '../../assets/images/sad.svg';
 import { Button, Loader, Modal } from '../../components';
+import { InputSearch } from './components/InputSearch';
 
 import {
   Card,
@@ -15,7 +16,6 @@ import {
   EmptyListContainer,
   ErrorContainer,
   Header,
-  InputSearchContainer,
   ListHeader,
   SearchNotFoundContainer,
 } from './styles';
@@ -43,25 +43,12 @@ export default function ContactsList() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
-      <Modal
-        danger
-        title={`Você tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
-        visible={isDeleteModalVisible}
-        onCancel={handleCloseDeleteModal}
-        onConfirm={handleConfirmDeleteContact}
-        isLoading={isLoadingDelete}
-      >
-        <p>Esta ação não poderá ser desfeita!</p>
-      </Modal>
+
       {contacts.length > 0 && (
-        <InputSearchContainer>
-          <input
-            onChange={handleChangeSearchTerm}
-            type="text"
-            placeholder="Pesquisar contato..."
-            name="search"
-          />
-        </InputSearchContainer>
+        <InputSearch
+          handleChangeSearchTerm={handleChangeSearchTerm}
+          value={searchTerm}
+        />
       )}
 
       <Header
@@ -147,6 +134,17 @@ export default function ContactsList() {
               </div>
             </Card>
           ))}
+
+          <Modal
+            danger
+            title={`Você tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
+            visible={isDeleteModalVisible}
+            onCancel={handleCloseDeleteModal}
+            onConfirm={handleConfirmDeleteContact}
+            isLoading={isLoadingDelete}
+          >
+            <p>Esta ação não poderá ser desfeita!</p>
+          </Modal>
         </>
       )}
     </Container>
