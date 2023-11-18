@@ -6,16 +6,15 @@ import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
-import sad from '../../assets/images/sad.svg';
-import { Button, Loader, Modal } from '../../components';
+import { Loader, Modal } from '../../components';
 import { Header } from './components/Header';
 import { InputSearch } from './components/InputSearch';
 
+import { ErrorStatus } from './components/ErrorStatus';
 import {
   Card,
   Container,
   EmptyListContainer,
-  ErrorContainer,
   ListHeader,
   SearchNotFoundContainer,
 } from './styles';
@@ -57,17 +56,8 @@ export default function ContactsList() {
         hasError={hasError}
       />
 
-      {hasError && (
-        <ErrorContainer>
-          <img src={sad} alt="sad face" />
-          <div className="details">
-            <strong>Ocorreu um erro ao obter os seus contatos!</strong>
-            <Button type="button" onClick={handleTryAgain}>
-              Tentar novamente!
-            </Button>
-          </div>
-        </ErrorContainer>
-      )}
+      {hasError && <ErrorStatus onTryAgain={handleTryAgain} />}
+
       {!hasError && (
         <>
           {contacts.length < 1 && !isLoading && (
