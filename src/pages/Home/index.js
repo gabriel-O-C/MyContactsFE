@@ -1,20 +1,17 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line  */
-import { Link } from 'react-router-dom';
-import Arrow from '../../assets/images/icons/arrow.svg';
-import Edit from '../../assets/images/icons/edit.svg';
-import trash from '../../assets/images/icons/trash.svg';
 import { Loader, Modal } from '../../components';
-import { Header } from './components/Header';
-import { InputSearch } from './components/InputSearch';
-
+import ContactsList from './components/ContactsList';
 import { EmptyList } from './components/EmptyList';
 import { ErrorStatus } from './components/ErrorStatus';
+import { Header } from './components/Header';
+import { InputSearch } from './components/InputSearch';
 import { SearchNotFound } from './components/SearchNotFound';
-import { Card, Container, ListHeader } from './styles';
+
+import { Container } from './styles';
 import useHome from './useHome';
 
-export default function ContactsList() {
+export default function Home() {
   const {
     contactBeingDeleted,
     contacts,
@@ -59,39 +56,12 @@ export default function ContactsList() {
             <SearchNotFound searchTerm={searchTerm} />
           )}
 
-          {filteredContacts.length > 0 && (
-            <ListHeader orderBy={orderBy}>
-              <button type="button" onClick={handleToggleOrderBy}>
-                <span>nome</span>
-                <img src={Arrow} alt="arrow" />
-              </button>
-            </ListHeader>
-          )}
-          {filteredContacts.map((contact) => (
-            <Card key={contact.id}>
-              <div className="info">
-                <div className="contact-name">
-                  <strong>{contact.name}</strong>
-                  {contact.category.name && (
-                    <small>{contact.category.name}</small>
-                  )}
-                </div>
-                <span>{contact.email}</span>
-                <span>{contact.phone}</span>
-              </div>
-              <div className="actions">
-                <Link to={`/edit/${contact.id}`} title="edit contacts page">
-                  <img src={Edit} alt="edit" />
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => handleDeleteContact(contact)}
-                >
-                  <img src={trash} alt="delete" />
-                </button>
-              </div>
-            </Card>
-          ))}
+          <ContactsList
+            filteredContacts={filteredContacts}
+            onDeleteContact={handleDeleteContact}
+            onToggleOrderBy={handleToggleOrderBy}
+            orderBy={orderBy}
+          />
 
           <Modal
             danger

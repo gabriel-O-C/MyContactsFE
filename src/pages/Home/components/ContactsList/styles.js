@@ -1,38 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  margin-top: 32px;
-  `;
-
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-
-    strong{
-      color: #222;
-      font-size: 2.4rem;
-    }
-    a{
-      color: ${({ theme }) => theme.colors.primary.main};
-      text-decoration: none;
-      font-weight: bold;
-      border: 2px solid ${({ theme }) => theme.colors.primary.main};
-      padding: 8px 16px;
-      border-radius: 4px;
-      transition: all .3s ease-in;
-
-        &:hover{
-          background: ${({ theme }) => theme.colors.primary.main};
-          color: #fff;
-        }
-  }
-`;
-
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
   margin-top: 24px;
-    header{
+
       button{
       background: transparent;
       border: none;
@@ -44,8 +14,10 @@ export const ListContainer = styled.div`
         font-weight: bold;
         color: ${({ theme }) => theme.colors.primary.main};
       }
-    }
-
+      img{
+        transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
+        transition: transform .2s ease-in;
+      }
 `;
 
 export const Card = styled.div`
