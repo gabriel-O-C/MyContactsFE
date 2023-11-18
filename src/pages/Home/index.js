@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line  */
 import { Link } from 'react-router-dom';
-import emptyBox from '../../assets/images/empty-box.svg';
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
@@ -10,13 +9,10 @@ import { Loader, Modal } from '../../components';
 import { Header } from './components/Header';
 import { InputSearch } from './components/InputSearch';
 
+import { EmptyList } from './components/EmptyList';
 import { ErrorStatus } from './components/ErrorStatus';
 import {
-  Card,
-  Container,
-  EmptyListContainer,
-  ListHeader,
-  SearchNotFoundContainer,
+  Card, Container, ListHeader, SearchNotFoundContainer,
 } from './styles';
 import useHome from './useHome';
 
@@ -60,16 +56,7 @@ export default function ContactsList() {
 
       {!hasError && (
         <>
-          {contacts.length < 1 && !isLoading && (
-            <EmptyListContainer>
-              <img src={emptyBox} alt="empty box" />
-              <p>
-                Você ainda não tem nenhum contato cadastrado! Clique no botão
-                <span> ”Novo contato” </span>à cima para cadastrar o seu
-                primeiro!
-              </p>
-            </EmptyListContainer>
-          )}
+          {contacts.length < 1 && !isLoading && <EmptyList />}
           {contacts.length > 0 && filteredContacts.length < 1 && (
             <SearchNotFoundContainer>
               <img src={magnifierQuestion} alt="magnifier question" />

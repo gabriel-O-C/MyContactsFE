@@ -67,23 +67,6 @@ export const Card = styled.div`
     }
 `;
 
-export const EmptyListContainer = styled.div`
- display: flex;
- flex-direction: column;
- margin-top: 16px;
- align-items: center;
- color: ${({ theme }) => theme.colors.gray[200]};
- text-align: center;
-
- img {
- margin-bottom: 8px;
-}
-
- span {
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary.main};
-}
-`;
 export const SearchNotFoundContainer = styled.div`
  display: flex;
  align-items: flex-start;
