@@ -8,6 +8,7 @@ import trash from '../../assets/images/icons/trash.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import sad from '../../assets/images/sad.svg';
 import { Button, Loader, Modal } from '../../components';
+import { Header } from './components/Header';
 import { InputSearch } from './components/InputSearch';
 
 import {
@@ -15,7 +16,6 @@ import {
   Container,
   EmptyListContainer,
   ErrorContainer,
-  Header,
   ListHeader,
   SearchNotFoundContainer,
 } from './styles';
@@ -52,22 +52,11 @@ export default function ContactsList() {
       )}
 
       <Header
-        justifyContent={
-          hasError
-            ? 'flex-end'
-            : contacts.length > 0
-              ? 'space-between'
-              : 'center'
-        }
-      >
-        {!hasError && contacts.length > 0 && (
-          <strong>
-            {filteredContacts.length}
-            {filteredContacts.length === 1 ? ' contato' : ' contatos'}
-          </strong>
-        )}
-        <Link to="/new">Novo contato</Link>
-      </Header>
+        quantityOfcontacts={contacts.length}
+        quantityOffilteredContacts={filteredContacts.length}
+        hasError={hasError}
+      />
+
       {hasError && (
         <ErrorContainer>
           <img src={sad} alt="sad face" />
